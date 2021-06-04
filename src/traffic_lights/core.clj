@@ -48,8 +48,8 @@
   ([light times limit]
    (if (< times limit)
      (run (change light) (inc times) limit)))
-  ([light times]
-   (run light 0 times))
+  ([light limit]
+   (run light 0 limit))
   )
 
 (defn -main [& args]
