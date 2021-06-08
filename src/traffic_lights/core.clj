@@ -1,17 +1,14 @@
 (ns traffic-lights.core)
 
-(def green-light "GREEN")
-(def yellow-light "YELLOW")
-(def red-light "RED")
 (def millis-multiplier 1000)
 
-(def lights {green-light  {:next-light      yellow-light
+(def lights {:green-light  {:next-light      :yellow-light
                            :seconds-to-wait 10
                            }
-             yellow-light {:next-light      red-light
+             :yellow-light {:next-light      :red-light
                            :seconds-to-wait 1
                            }
-             red-light    {:next-light      green-light
+             :red-light    {:next-light      :green-light
                            :seconds-to-wait 5
                            }
              }
@@ -45,13 +42,13 @@
   )
 
 (defn run
-  ([light times limit]
-   (if (< times limit)
-     (run (change light) (inc times) limit)))
-  ([light limit]
-   (run light 0 limit))
+  ([light total times]
+   (if (< times total)
+     (run (change light) total (inc times))))
+  ([light total]
+   (run light total 0))
   )
 
 (defn -main [& args]
-  (run green-light 30)
+  (run :green-light 30)
   )
